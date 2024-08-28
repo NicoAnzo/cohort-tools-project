@@ -2,8 +2,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const {ObjectId} = Schema.Types
-
 // CREATE SCHEMA
 // Schema - describes and enforces the structure of the documents
 const studentSchema = new Schema({
@@ -12,12 +10,15 @@ const studentSchema = new Schema({
     email: String,
     phone: String,
     linkedinUrl: String,
-    languages: Array,
+    languages: [String],
     program: String,
     background: String,
     image: String,
-    projects: Array,
-    cohort: ObjectId
+    projects: [String],
+    cohort: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Cohort"
+    }
 });
 
 // CREATE MODEL
