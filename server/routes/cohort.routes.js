@@ -11,8 +11,7 @@ router.get("/api/cohorts", (req, res) => {
         res.json(cohortArr);
       })
       .catch((error) => {
-        console.log("Error trying to get the list of cohorts", error);
-        res.status(500).json({error: "Failed"})
+        next(error);
       });
   
   });
@@ -28,8 +27,7 @@ router.get("/api/cohorts", (req, res) => {
         res.json(cohortFromDB)
       })
       .catch((error) => {
-        console.log("Error trying to get the specified cohort", error);
-        res.status(500).json({error: "Failed"})
+        next(error);
       });
   
   });
@@ -45,8 +43,7 @@ router.get("/api/cohorts", (req, res) => {
         res.status(201).json(cohortFromDB)
       })
       .catch((error) => {
-        console.log("Error trying to create a new cohort", error);
-        res.status(500).json({error: "Failed"})
+        next(error);
       });
   });
   
@@ -62,8 +59,7 @@ router.get("/api/cohorts", (req, res) => {
         res.json(cohortFromDB)
       })
       .catch((error) => {
-        console.log("Error trying to update a cohort", error);
-        res.status(500).json({error: "Failed"})
+        next(error);
       });
   });
   
@@ -78,8 +74,7 @@ router.get("/api/cohorts", (req, res) => {
         res.json(response)
       })
       .catch((error) => {
-        console.log("Error trying to delete a cohort", error);
-        res.status(500).json({error: "Failed"})
+        next(error);
       });
   });
   

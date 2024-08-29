@@ -1,6 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+const { errorHandler, notFoundHandler } = require('../middleware/error.handling');
 
 const cookieParser = require("cookie-parser");
 const PORT = 5005;
@@ -40,6 +41,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 
+
 // ROUTES - https://expressjs.com/en/starter/basic-routing.html
 // Devs Team - Start working on the routes here:
 // ...
@@ -53,6 +55,9 @@ app.use("/", cohortRouter);
 
 const studentRouter = require("./routes/student.routes");
 app.use("/", studentRouter);
+
+app.use(notFoundHandler);
+app.use(errorHandler);
 
 
 // START SERVER

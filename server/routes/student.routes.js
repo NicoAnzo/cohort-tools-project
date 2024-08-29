@@ -14,8 +14,7 @@ router.get("/api/students", (req, res) => {
         res.json(studentArr);
       })
       .catch((error) => {
-        console.log("Error trying to get the list of students", error);
-        res.status(500).json({error: "Failed"})
+        next(error);
       });
   });
   
@@ -31,8 +30,7 @@ router.get("/api/students", (req, res) => {
         res.json(studentArr)
       })
       .catch((error) => {
-        console.log("Error trying to get the list of students from the specified cohort", error);
-        res.status(500).json({error: "Failed"})
+        next(error);
       });
   });
   
@@ -48,8 +46,7 @@ router.get("/api/students", (req, res) => {
         res.json(studentFromDB)
       })
       .catch((error) => {
-        console.log("Error trying to get the specified student", error);
-        res.status(500).json({error: "Failed"})
+        next(error);
       });
   });
   
@@ -64,8 +61,7 @@ router.get("/api/students", (req, res) => {
         res.status(201).json(newStudent)
       })
       .catch((error) => {
-        console.log("Error trying to create a new student", error);
-        res.status(500).json({error: "Failed"})
+        next(error);
       });
   });
   
@@ -81,8 +77,7 @@ router.get("/api/students", (req, res) => {
         res.json(studentFromDB)
       })
       .catch((error) => {
-        console.log("Error trying to update a student", error);
-        res.status(500).json({error: "Failed"})
+        next(error);
       });
   });
   
@@ -97,8 +92,7 @@ router.get("/api/students", (req, res) => {
       res.json(response)
     })
     .catch((error) => {
-      console.log("Error trying to delete a student", error);
-      res.status(500).json({error: "Failed"})
+      next(error);
     });
   });
   
