@@ -1,7 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
-const { errorHandler, notFoundHandler } = require('../middleware/error.handling');
+const { errorHandler, notFoundHandler } = require('./middleware/error.handling');
 
 const cookieParser = require("cookie-parser");
 const PORT = 5005;
@@ -33,7 +33,7 @@ app.use(
   })
 );
 
-
+require('dotenv').config()
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(express.static("public"));
@@ -55,6 +55,13 @@ app.use("/", cohortRouter);
 
 const studentRouter = require("./routes/student.routes");
 app.use("/", studentRouter);
+
+const authRouter = require("./routes/auth.routes");   
+app.use("/auth", authRouter);   
+
+const userRouter = require("./routes/user.routes");
+app.use("/", userRouter);
+
 
 app.use(notFoundHandler);
 app.use(errorHandler);
