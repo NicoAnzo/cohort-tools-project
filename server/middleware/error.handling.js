@@ -1,5 +1,4 @@
 
-
 function errorHandler(err, req, res, next) {
     // This middleware has 4 arguments. It will run whenever `next(err)` is called.
   
@@ -18,8 +17,5 @@ function errorHandler(err, req, res, next) {
     res.status(404).json({ message: 'This route does not exist' });
   }
   
-  module.exports = {
-    errorHandler,
-    notFoundHandler
-  };
+  module.exports = { errorHandler, notFoundHandler };
   

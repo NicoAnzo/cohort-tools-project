@@ -1,8 +1,7 @@
+
 const router = require("express").Router();
 
 const Student = require("../models/Student.model");
-const Cohort = require("../models/Cohort.model")
-
 
 // STUDENT ROUTES
 
@@ -18,39 +17,39 @@ router.get("/api/students", (req, res) => {
       });
   });
   
-///////////////////////
+//.....................
   
-  router.get("/api/students/cohort/:cohortId", (req, res) => {
+router.get("/api/students/cohort/:cohortId", (req, res) => {
+
+  const { cohortId } = req.params;
+
+  Student.find({cohort: cohortId})
+    .populate("cohort")
+    .then((studentArr) => {
+      res.json(studentArr)
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
   
-    const { cohortId } = req.params;
+//.....................
   
-    Student.find({cohort: cohortId})
-      .populate("cohort")
-      .then((studentArr) => {
-        res.json(studentArr)
-      })
-      .catch((error) => {
-        next(error);
-      });
-  });
+router.get("/api/students/:studentId", (req, res) => {
+
+  const { studentId } = req.params;
+
+  Student.findOne({_id: studentId})
+    .populate("cohort")
+    .then((studentFromDB) => {
+      res.json(studentFromDB)
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
   
-//////////////////
-  
-  router.get("/api/students/:studentId", (req, res) => {
-  
-    const { studentId } = req.params;
-  
-    Student.findOne({_id: studentId})
-      .populate("cohort")
-      .then((studentFromDB) => {
-        res.json(studentFromDB)
-      })
-      .catch((error) => {
-        next(error);
-      });
-  });
-  
-///////////////////
+//.....................
   
   router.post("/api/students", (req, res) => {
   
@@ -65,36 +64,36 @@ router.get("/api/students", (req, res) => {
       });
   });
   
-//////////////////////
+//.....................
   
-  router.put("/api/students/:studentId", (req, res) => {
-  
-    const { studentId } = req.params;
-    const newStudentDetails = req.body;
-  
-    Student.findOneAndUpdate({_id: studentId}, newStudentDetails, {new: true})
-      .then((studentFromDB) => {
-        res.json(studentFromDB)
-      })
-      .catch((error) => {
-        next(error);
-      });
-  });
-  
-//////////////////////
-  
-  router.delete("/api/students/:studentId", (req, res) => {
-  
-    const { studentId } = req.params;
-  
-    Student.deleteOne({_id: studentId})
-    .then((response) => {
-      res.json(response)
+router.put("/api/students/:studentId", (req, res) => {
+
+  const { studentId } = req.params;
+  const newStudentDetails = req.body;
+
+  Student.findOneAndUpdate({_id: studentId}, newStudentDetails, {new: true})
+    .then((studentFromDB) => {
+      res.json(studentFromDB)
     })
     .catch((error) => {
       next(error);
     });
+});
+  
+//.....................
+  
+router.delete("/api/students/:studentId", (req, res) => {
+
+  const { studentId } = req.params;
+
+  Student.deleteOne({_id: studentId})
+  .then((response) => {
+    res.json(response)
+  })
+  .catch((error) => {
+    next(error);
   });
+});
   
-  
+
 module.exports = router;

@@ -1,4 +1,3 @@
-// routes/auth.routes.js
 
 const express = require("express");
 const bcrypt = require('bcryptjs');
@@ -10,7 +9,6 @@ const { isAuthenticated } = require("./../middleware/jwt.middleware.js");
 const router = express.Router();
 const saltRounds = 10;
 
-/////////////////////////////
 
 // POST /auth/signup  - Creates a new user in the database
 router.post('/signup', (req, res, next) => {
@@ -71,7 +69,7 @@ router.post('/signup', (req, res, next) => {
       });
   });
   
-////////////////////////////
+//.....................
 
 // POST  /auth/login - Verifies email and password and returns a JWT
 router.post('/login', (req, res, next) => {
@@ -123,10 +121,10 @@ router.post('/login', (req, res, next) => {
         res.status(500).json({ message: "Internal Server Error" })});
   });
   
-///////////////////////////////
+//.....................
 
 // GET  /auth/verify  -  Used to verify JWT stored on the client
-router.get('/verify', isAuthenticated, (req, res, next) => {       // <== CREATE NEW ROUTE
+router.get('/verify', isAuthenticated, (req, res, next) => {     
  
     // If JWT token is valid the payload gets decoded by the
     // isAuthenticated middleware and made available on `req.payload`
@@ -138,19 +136,4 @@ router.get('/verify', isAuthenticated, (req, res, next) => {       // <== CREATE
   });
    
   
-  module.exports = router;
-  
-
-
-
-
-
-
-// POST  /auth/login
-// ...
-
-
-// GET  /auth/verify
-// ...
-
 module.exports = router;
